@@ -10,34 +10,34 @@ function getRandomFloat(min, max, dots) {
   return Math.floor(Math.random() * (max - min)) - Math.random(max - min).toFixed(dots);
 };
 
-let authorRandom = [
-    'img/avatars/user01.png',
-    'img/avatars/user02.png',
-    'img/avatars/user03.png',
-    'img/avatars/user04.png',
-    'img/avatars/user05.png',
-    'img/avatars/user06.png',
+const AUTHOR_RANDOM = [
+  'img/avatars/user01.png',
+  'img/avatars/user02.png',
+  'img/avatars/user03.png',
+  'img/avatars/user04.png',
+  'img/avatars/user05.png',
+  'img/avatars/user06.png',
 ];
 
-let checkinRandom = [
-    '12:00',
-    '13:00',
-    '14:00',
+const CHECKIN_RANDOM = [
+  '12:00',
+  '13:00',
+  '14:00',
 ];
 
-let featuresRandom = [
-    'wifi', 
-    'dishwasher', 
-    'parking', 
-    'washer', 
-    'elevator', 
-    'conditioner',
+const FEATURES_RANDOM = [
+  'wifi', 
+  'dishwasher', 
+  'parking', 
+  'washer', 
+  'elevator', 
+  'conditioner',
 ];
 
-let photosRandom = [
-    'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-    'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 
-    'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
+const PHOTOS_RANDOM = [
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
 let authorOffer = {
@@ -57,30 +57,31 @@ let locationOffer = {
 
 function createauthorOffer () {
   return authorOffer = {
-    author: authorRandom[getRandomFloat(1, authorRandom.length  - 1)]
-};
+    author: AUTHOR_RANDOM[getRandomFloat(1, AUTHOR_RANDOM.length  - 1)]
+  };
 };
 
 function createDescriptionOffer () {
   return decriptionOffer = {
-      title: 'Хорошая квартира в Токио',
-      address: 'location.x, location.y',
-      price: getRandomFloat(1, 100),
-      rooms: getRandomFloat(1, 5),
-      guests: getRandomFloat(1, 30),
-      chechkin: checkinRandom[getRandomFloat(0, checkinRandom.length  - 1)],
-      checkout: checkinRandom[getRandomFloat(0, checkinRandom.length  - 1)],
-      features: featuresRandom[getRandomFloat(0, featuresRandom.length - 1)],
-      photo: photosRandom[getRandomFloat(0, photosRandom.length - 1)],
-      description: 'Хорошая квартира в Токио',
-};
+    title: 'Хорошая квартира в Токио',
+    address: 'location.x, location.y',
+    price: getRandomFloat(1, 100),
+    rooms: getRandomFloat(1, 5),
+    guests: getRandomFloat(1, 30),
+    chechkin: CHECKIN_RANDOM[getRandomFloat(0, CHECKIN_RANDOM.length  - 1)],
+    checkout: CHECKIN_RANDOM[getRandomFloat(0, CHECKIN_RANDOM.length  - 1)],
+    features: FEATURES_RANDOM[getRandomFloat(0, FEATURES_RANDOM.length - 1)],
+    photo: PHOTOS_RANDOM[getRandomFloat(0, PHOTOS_RANDOM.length - 1)],
+    description: 'Хорошая квартира в Токио',
+  };
 };
 function createlocationOffer () {
   return locationOffer = {
     lat: getRandomFloat(1, 1000, 3),
-    lng: getRandomFloat(1, 1000, 3)
+    lng: getRandomFloat(1, 1000, 3)  
   };
 };
+// Выше используются другие значени ибо при использовании значений академии перестает работать документ
 
 let createOffer = (author, description, location) => {
   return author, description, location
