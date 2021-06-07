@@ -35,19 +35,23 @@ const PHOTOS_RANDOM = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-let authorOffer = {
+// let authorOffer = {
 
-};
+// };
 
-let decriptionOffer = {
-  // title: 'Хорошая квартира в Токио',
-  // address: 'location.x, location.y',
-  // description: 'Хорошая квартира в Токио',
-};
+// let decriptionOffer = {
+//   // title: 'Хорошая квартира в Токио',
+//   // address: 'location.x, location.y',
+//   // description: 'Хорошая квартира в Токио',
+// };
 
-let locationOffer = {
+// let locationOffer = {
 
-};
+// };
+
+const offers = [
+
+];
 
 
 function createauthorOffer () {
@@ -77,13 +81,19 @@ function createlocationOffer () {
   };
 }
 
-const createOffer = (author, description, location) => (author, description, location);
+// const createOffer = (author, description, location) => (author, description, location);
+const createOffer = (author, description, location) => ({
+  author,
+  offer: description,
+  location,
+});
 
-createOffer(createauthorOffer(), createDescriptionOffer(), createlocationOffer());
+function createOffers () {
+  for (let i = 0; i < 10; i++) {
+    offers.push(createOffer(createauthorOffer(), createDescriptionOffer(), createlocationOffer()));
+  }
+  return offers;
+}
 
-createauthorOffer();
-createDescriptionOffer();
-createlocationOffer();
-console.log(authorOffer);
-console.log(decriptionOffer);
-console.log(locationOffer);
+createOffers();
+console.log(offers);
