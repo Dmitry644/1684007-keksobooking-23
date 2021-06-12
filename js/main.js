@@ -1,4 +1,5 @@
 import {createOffers, offers} from './generate.js';
 
-  createOffers();
-  console.log(offers);
+createOffers();
+offers;
+// console.log(offers);

@@ -39,13 +39,17 @@ let authorOffer = {
 
 };
 
+authorOffer;
+
 let decriptionOffer = {
 
 };
+decriptionOffer;
 
 let locationOffer = {
 
 };
+locationOffer;
 
 export const offers = [
 
