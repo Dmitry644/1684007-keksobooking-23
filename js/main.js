@@ -1,5 +1,6 @@
 import {createOffers, offers} from './generate.js';
+import './offer.js';
 
-createOffers();
-offers;
+// createOffers();
+// offers;
 // console.log(offers);
