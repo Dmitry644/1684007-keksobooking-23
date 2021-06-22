@@ -80,7 +80,7 @@ function createDescriptionOffer () {
     type: TYPES_RANDOM[getRandomPositiveFloat(0, TYPES_RANDOM.length -1)],
     checkin: CHECKIN_RANDOM[getRandomPositiveFloat(0, CHECKIN_RANDOM.length  - 1)],
     checkout: CHECKIN_RANDOM[getRandomPositiveFloat(0, CHECKIN_RANDOM.length  - 1)],
-    features: FEATURES_RANDOM[getRandomPositiveFloat(0, FEATURES_RANDOM.length - 1)],
+    features: [FEATURES_RANDOM[getRandomPositiveFloat(0, FEATURES_RANDOM.length - 1)]],
     photo: PHOTOS_RANDOM[getRandomPositiveFloat(0, PHOTOS_RANDOM.length - 1)],
     description: 'Хорошая квартира в Токио',
   };

@@ -1,3 +1,4 @@
+import { create } from 'browser-sync';
 import {offers} from './generate.js';
 
 
@@ -5,7 +6,7 @@ const renderCard = (ad) => {
 
   const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
   const cardElement = cardTemplate.cloneNode(true);
-  const features = [ad.offer.features];
+  // const features = [ad.offer.features];
 
 
   const cardElementAvatar = cardElement.querySelector('.popup__avatar');
@@ -78,15 +79,27 @@ const renderCard = (ad) => {
     cardElementTime.textContent = ('Описание отсутствует');
   }
 
-  const cardElementPopupList = cardElement.querySelector('.popup__features');
-  const modifiers = features.map((feature) => `popup__feature--${feature}`);
-  cardElementPopupList.querySelectorAll('.popup__feature');
-  cardElementPopupList.querySelectorAll('.popup__feature').forEach((item) => {
-    const modifier = item.classList[1];
-    if (! modifiers.includes(modifier)) {
-      item.remove();
-    }
-  });
+  // const cardElementPopupList = cardElement.querySelector('.popup__features');
+  // const modifiers = features.map((feature) => `popup__feature--${feature}`);
+  // cardElementPopupList.querySelectorAll('.popup__feature');
+  // cardElementPopupList.querySelectorAll('.popup__feature').forEach((item) => {
+  //   const modifier = item.classList[1];
+  //   if (! modifiers.includes(modifier)) {
+  //     item.remove();
+  //   }
+  // });
+
+  const features = offers[0].offer.features;
+  console.log(offers[0].offer.features)
+  const featureListElement = document.querySelector('.popup__features');
+  
+  // собираем html-строку, состоящую из нужных тегов
+  const featuresHtml = features.map(
+    (feature) => `<li class="popup__feature popup__feature--${feature}"></li>`  // тут с помощью .map собираем массив из строк
+  ).join('') // методом .join склеиваем его в одну строку
+  
+  // заменяем полностью html
+  featureListElement.innerHTML = featuresHtml 
   if (! ad.offer.features) {
     cardElementPopupList.textContent = 'Описание отсутствует';
   }
