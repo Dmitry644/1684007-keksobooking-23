@@ -1,4 +1,3 @@
-import { create } from 'browser-sync';
 import {offers} from './generate.js';
 
 
@@ -89,19 +88,18 @@ const renderCard = (ad) => {
   //   }
   // });
 
-  const features = offers[0].offer.features;
-  console.log(offers[0].offer.features)
-  const featureListElement = document.querySelector('.popup__features');
-  
+  const features = ad.offer.features;
+  const featureListElement = cardElement.querySelector('.popup__features');
+
   // собираем html-строку, состоящую из нужных тегов
   const featuresHtml = features.map(
-    (feature) => `<li class="popup__feature popup__feature--${feature}"></li>`  // тут с помощью .map собираем массив из строк
-  ).join('') // методом .join склеиваем его в одну строку
-  
+    (feature) => `<li class="popup__feature popup__feature--${feature}"></li>`,  // тут с помощью .map собираем массив из строк
+  ).join(''); // методом .join склеиваем его в одну строку
+
   // заменяем полностью html
-  featureListElement.innerHTML = featuresHtml 
+  featureListElement.innerHTML = featuresHtml;
   if (! ad.offer.features) {
-    cardElementPopupList.textContent = 'Описание отсутствует';
+    featureListElement.textContent = 'Описание отсутствует';
   }
 
   const cardElementDescription = cardElement.querySelector('.popup__description');
