@@ -66,7 +66,7 @@ export const offers = [
 
 function createauthorOffer () {
   return authorOffer = {
-    // author: AUTHOR_RANDOM[getRandomPositiveFloat(1, AUTHOR_RANDOM.length  - 1)],
+    author: AUTHOR_RANDOM[getRandomPositiveFloat(1, AUTHOR_RANDOM.length  - 1)],
   };
 }
 
