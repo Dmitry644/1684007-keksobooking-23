@@ -20,6 +20,14 @@ const CHECKIN_RANDOM = [
   '14:00',
 ];
 
+const TYPES_RANDOM = [
+  'flat',
+  'bungalow',
+  'house',
+  'palace',
+  'hotel',
+];
+
 const FEATURES_RANDOM = [
   'wifi',
   'dishwasher',
@@ -69,9 +77,10 @@ function createDescriptionOffer () {
     price: getRandomPositiveFloat(1, 100),
     rooms: getRandomPositiveFloat(1, 5),
     guests: getRandomPositiveFloat(1, 30),
-    chechkin: CHECKIN_RANDOM[getRandomPositiveFloat(0, CHECKIN_RANDOM.length  - 1)],
+    type: TYPES_RANDOM[getRandomPositiveFloat(0, TYPES_RANDOM.length -1)],
+    checkin: CHECKIN_RANDOM[getRandomPositiveFloat(0, CHECKIN_RANDOM.length  - 1)],
     checkout: CHECKIN_RANDOM[getRandomPositiveFloat(0, CHECKIN_RANDOM.length  - 1)],
-    features: FEATURES_RANDOM[getRandomPositiveFloat(0, FEATURES_RANDOM.length - 1)],
+    features: [FEATURES_RANDOM[getRandomPositiveFloat(0, FEATURES_RANDOM.length - 1)]],
     photo: PHOTOS_RANDOM[getRandomPositiveFloat(0, PHOTOS_RANDOM.length - 1)],
     description: 'Хорошая квартира в Токио',
   };
@@ -97,5 +106,5 @@ export function createOffers () {
   return offers;
 }
 
-//   createOffers();
+createOffers();
 //   console.log(offers);
