@@ -83,8 +83,7 @@ const roomNumber = document.querySelector('#room_number');
 const capacityNumber = document.querySelector('#capacity');
 const capacityNumberChildren = capacityNumber.children;
 
-
-roomNumber.addEventListener('change', () => {
+const syncCapacity = () => {
   if (roomNumber.value === '1') {
     capacityNumber.value = '1';
     capacityNumberChildren[0].disabled = true;
@@ -113,4 +112,9 @@ roomNumber.addEventListener('change', () => {
     capacityNumberChildren[2].disabled = true;
     capacityNumberChildren[3].disabled = true;
   }
+};
+syncCapacity();
+
+roomNumber.addEventListener('change', () => {
+  syncCapacity();
 });
