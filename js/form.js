@@ -2,7 +2,6 @@ const inputTitle = document.querySelector('#title');
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 
-
 inputTitle.addEventListener('input', () => {
   const valueLength = inputTitle.value.length;
 
@@ -11,7 +10,7 @@ inputTitle.addEventListener('input', () => {
   } else if (valueLength > MAX_TITLE_LENGTH) {
     inputTitle.setCustomValidity(`Удалите лишние ${MAX_TITLE_LENGTH - valueLength} символов`);
   } else {
-    inputTitle.setCustomValidity('');
+    inputTitle.  etCustomValidity('');
   }
 
   inputTitle.reportValidity();
@@ -56,9 +55,9 @@ inputPrice.addEventListener('input', () => {
 
 
 const timeIn = document.querySelector('#timein');
-const timeInChildren = timeIn.children;
+// const timeInChildren = timeIn.children;
 const timeOut = document.querySelector('#timeout');
-const timeOutChildren = timeOut.children;
+// const timeOutChildren = timeOut.children;
 
 timeIn.addEventListener('change', () => {
   if (timeIn.value === '12:00') {
@@ -80,12 +79,12 @@ timeOut.addEventListener('change', () => {
 });
 
 const roomNumber = document.querySelector('#room_number');
-const roomNumberChildren = roomNumber.children;
+// const roomNumberChildren = roomNumber.children;
 const capacityNumber = document.querySelector('#capacity');
 const capacityNumberChildren = capacityNumber.children;
 
-roomNumber.addEventListener('click', () => {
 
+roomNumber.addEventListener('change', () => {
   if (roomNumber.value === '1') {
     capacityNumber.value = '1';
     capacityNumberChildren[0].disabled = true;
@@ -94,14 +93,14 @@ roomNumber.addEventListener('click', () => {
     capacityNumberChildren[3].disabled = true;
   }
   if (roomNumber.value === '2') {
-    capacityNumber.value = '1';
+    capacityNumber.value = '2';
     capacityNumberChildren[0].disabled = true;
     capacityNumberChildren[1].disabled = false;
     capacityNumberChildren[2].disabled = false;
     capacityNumberChildren[3].disabled = true;
   }
   if (roomNumber.value === '3') {
-    capacityNumber.value = '1';
+    capacityNumber.value = '3';
     capacityNumberChildren[0].disabled = true;
     capacityNumberChildren[1].disabled = false;
     capacityNumberChildren[2].disabled = false;
