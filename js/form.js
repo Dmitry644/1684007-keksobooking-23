@@ -10,7 +10,7 @@ inputTitle.addEventListener('input', () => {
   } else if (valueLength > MAX_TITLE_LENGTH) {
     inputTitle.setCustomValidity(`Удалите лишние ${MAX_TITLE_LENGTH - valueLength} символов`);
   } else {
-    inputTitle.  etCustomValidity('');
+    inputTitle.setCustomValidity('');
   }
 
   inputTitle.reportValidity();
