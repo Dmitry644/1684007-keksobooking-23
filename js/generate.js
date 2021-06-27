@@ -70,10 +70,17 @@ function createauthorOffer () {
   };
 }
 
+function createlocationOffer () {
+  return locationOffer = {
+    lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
+    lng: getRandomPositiveFloat(139.70000, 139.80000, 5),
+  };
+}
+
 function createDescriptionOffer () {
   return decriptionOffer = {
     title: 'Хорошая квартира в Токио',
-    address: 'location.x, location.y',
+    address: `${locationOffer.lat} ${locationOffer.lng}`,
     price: getRandomPositiveFloat(1, 100),
     rooms: getRandomPositiveFloat(1, 5),
     guests: getRandomPositiveFloat(1, 30),
@@ -83,12 +90,6 @@ function createDescriptionOffer () {
     features: [FEATURES_RANDOM[getRandomPositiveFloat(0, FEATURES_RANDOM.length - 1)]],
     photo: PHOTOS_RANDOM[getRandomPositiveFloat(0, PHOTOS_RANDOM.length - 1)],
     description: 'Хорошая квартира в Токио',
-  };
-}
-function createlocationOffer () {
-  return locationOffer = {
-    lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
-    lng: getRandomPositiveFloat(139.70000, 139.80000, 5),
   };
 }
 
