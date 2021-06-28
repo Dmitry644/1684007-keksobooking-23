@@ -1,13 +1,27 @@
 import {offers} from './generate.js';
 import renderCard from './offer.js';
 
-let activeValue = false;
 const addressForm = document.querySelector('#address');
 
+function getActive (isActive) {
+  const activeForm = document.querySelector('.ad-form');
+  const mapFilters = document.querySelector('.map__filters');
+  const activeFormFieldset = activeForm.children;
+  const mapFiltersOption = mapFilters.children;
+  activeForm.classList.add('ad-form--disabled');
+  mapFilters.classList.add('map__filters--disabled');
+  
+  for (let i = 0; i < activeFormFieldset.length; i++) {
+    activeFormFieldset[i].disabled = !isActive;
+  }
+  for (let i = 0; i < mapFiltersOption.length; i++) {
+    mapFiltersOption[i].disabled = !isActive;
+  }
+}
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    activeValue = true;
+    getActive();
   })
   .setView({
     lat: 35.68334,
@@ -74,29 +88,4 @@ offers.forEach((ad, i) => {
         keepInView: true,
       },
     );
-  if(activeValue === false) {
-    markerOffer.remove();
-  }
 });
-
-
-function active () {
-  const activeForm = document.querySelector('.ad-form');
-  const mapFilters = document.querySelector('.map__filters');
-  const activeFormFieldset = activeForm.children;
-  const mapFiltersOption = mapFilters.children;
-  if (activeValue === false) {
-    tileLayer.remove();
-    marker.remove();
-    // markerOffer.remove()
-    activeForm.classList.add('ad-form--disabled');
-    mapFilters.classList.add('map__filters--disabled');
-    for (let i = 0; i < activeFormFieldset.length; i++) {
-      activeFormFieldset[i].disabled = true;
-    }
-    for (let i = 0; i < mapFiltersOption.length; i++) {
-      mapFiltersOption[i].disabled = true;
-    }
-  }
-}
-active();

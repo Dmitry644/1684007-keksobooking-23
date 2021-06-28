@@ -4,7 +4,7 @@ import './form.js';
 import './map.js';
 
 
-renderCard(offers[0]);
+// renderCard(offers[0]);
 
-const mapCanvas = document.querySelector('#map-canvas');
-mapCanvas.appendChild(renderCard(offers[0]));
+// const mapCanvas = document.querySelector('#map-canvas');
+// mapCanvas.appendChild(renderCard(offers[0]));
