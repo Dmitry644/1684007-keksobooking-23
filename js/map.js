@@ -5,7 +5,7 @@ const addressForm = document.querySelector('#address');
 
 const mapContainer = L.map('map-canvas');
 
-function getActive (isActive) {
+function setActive (isActive) {
   const activeForm = document.querySelector('.ad-form');
   const mapFilters = document.querySelector('.map__filters');
   const activeFormFieldset = activeForm.children;
@@ -38,9 +38,9 @@ function getActive (isActive) {
     ).addTo(mapContainer);
   }
 }
-getActive(true);
+setActive(true);
 const map = mapContainer.on('load', () => {
-  getActive(false);
+  setActive(false);
 });
 map.setView({
   lat: 35.68334,
