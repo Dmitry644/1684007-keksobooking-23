@@ -1,5 +1,5 @@
-import {offers} from './generate.js';
-import renderCard from './offer.js';
+// import {offers} from './generate.js';
+// import renderCard from './offer.js';
 import './form.js';
 import './map.js';
 

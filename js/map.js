@@ -3,6 +3,8 @@ import renderCard from './offer.js';
 
 const addressForm = document.querySelector('#address');
 
+const mapContainer = L.map('map-canvas');
+
 function getActive (isActive) {
   const activeForm = document.querySelector('.ad-form');
   const mapFilters = document.querySelector('.map__filters');
@@ -10,38 +12,46 @@ function getActive (isActive) {
   const mapFiltersOption = mapFilters.children;
   activeForm.classList.add('ad-form--disabled');
   mapFilters.classList.add('map__filters--disabled');
-  
+
   for (let i = 0; i < activeFormFieldset.length; i++) {
-    activeFormFieldset[i].disabled = !isActive;
+    activeFormFieldset[i].disabled = true;
   }
   for (let i = 0; i < mapFiltersOption.length; i++) {
-    mapFiltersOption[i].disabled = !isActive;
+    mapFiltersOption[i].disabled = true;
+  }
+
+  if (isActive === false) {
+    activeForm.classList.remove('ad-form--disabled');
+    mapFilters.classList.remove('map__filters--disabled');
+
+    for (let i = 0; i < activeFormFieldset.length; i++) {
+      activeFormFieldset[i].disabled = false;
+    }
+    for (let i = 0; i < mapFiltersOption.length; i++) {
+      mapFiltersOption[i].disabled = false;
+    }
+    L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      },
+    ).addTo(mapContainer);
   }
 }
-
-const map = L.map('map-canvas')
-  .on('load', () => {
-    getActive();
-  })
-  .setView({
-    lat: 35.68334,
-    lng: 139.78199,
-  }, 10);
-
+getActive(true);
+const map = mapContainer.on('load', () => {
+  getActive(false);
+});
+map.setView({
+  lat: 35.68334,
+  lng: 139.78199,
+}, 10);
 
 const address = {
   lat: 35.68334,
   lng: 139.78199,
 };
 addressForm.value = `lat: ${address.lat} lng: ${address.lng}`;
-
-
-const tileLayer = L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(map);
 
 const mainMarkerIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
