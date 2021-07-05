@@ -5,7 +5,7 @@ function getRandomPositiveFloat (a, b, digits) {
   return result.toFixed(digits);
 }
 
-const AUTHOR_RANDOM = [
+const AUTHORS_RANDOM = [
   'img/avatars/user01.png',
   'img/avatars/user02.png',
   'img/avatars/user03.png',
@@ -14,7 +14,7 @@ const AUTHOR_RANDOM = [
   'img/avatars/user06.png',
 ];
 
-const CHECKIN_RANDOM = [
+const CHECKINS_RANDOM = [
   '12:00',
   '13:00',
   '14:00',
@@ -66,29 +66,30 @@ export const offers = [
 
 function createauthorOffer () {
   return authorOffer = {
-    author: AUTHOR_RANDOM[getRandomPositiveFloat(1, AUTHOR_RANDOM.length  - 1)],
+    author: AUTHORS_RANDOM[getRandomPositiveFloat(1, AUTHORS_RANDOM.length  - 1)],
+  };
+}
+
+function createlocationOffer () {
+  return locationOffer = {
+    lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
+    lng: getRandomPositiveFloat(139.70000, 139.80000, 5),
   };
 }
 
 function createDescriptionOffer () {
   return decriptionOffer = {
     title: 'Хорошая квартира в Токио',
-    address: 'location.x, location.y',
+    address: `${locationOffer.lat} ${locationOffer.lng}`,
     price: getRandomPositiveFloat(1, 100),
     rooms: getRandomPositiveFloat(1, 5),
     guests: getRandomPositiveFloat(1, 30),
     type: TYPES_RANDOM[getRandomPositiveFloat(0, TYPES_RANDOM.length -1)],
-    checkin: CHECKIN_RANDOM[getRandomPositiveFloat(0, CHECKIN_RANDOM.length  - 1)],
-    checkout: CHECKIN_RANDOM[getRandomPositiveFloat(0, CHECKIN_RANDOM.length  - 1)],
+    checkin: CHECKINS_RANDOM[getRandomPositiveFloat(0, CHECKINS_RANDOM.length  - 1)],
+    checkout: CHECKINS_RANDOM[getRandomPositiveFloat(0, CHECKINS_RANDOM.length  - 1)],
     features: [FEATURES_RANDOM[getRandomPositiveFloat(0, FEATURES_RANDOM.length - 1)]],
     photo: PHOTOS_RANDOM[getRandomPositiveFloat(0, PHOTOS_RANDOM.length - 1)],
     description: 'Хорошая квартира в Токио',
-  };
-}
-function createlocationOffer () {
-  return locationOffer = {
-    lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
-    lng: getRandomPositiveFloat(139.70000, 139.80000, 5),
   };
 }
 
