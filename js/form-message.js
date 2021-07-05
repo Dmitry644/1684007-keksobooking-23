@@ -27,7 +27,7 @@ export function getErrorEventListener () {
 
     const errorMessage = errorElement.querySelector('.error__message');
     errorMessage.textContent = 'Ошибка размещения объявления';
-    const errorButton = errorElement.querySelector('.error__button');
+    const errorButton = errorElement.querySelector('.error__button')
     errorButton.textContent = 'Попробовать снова';
     return errorElement;
   }

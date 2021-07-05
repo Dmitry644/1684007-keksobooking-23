@@ -1,3 +1,5 @@
+import {getSuccessEventListener, getErrorEventListener} from './form-message.js';
+import {address, addressForm} from './map.js';
 const inputTitle = document.querySelector('#title');
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -118,3 +120,35 @@ syncCapacity();
 roomNumber.addEventListener('change', () => {
   syncCapacity();
 });
+
+
+const adForm = document.querySelector('.ad-form');
+const setFormSubmit = () => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+
+    fetch (
+      'https://23.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    ).then((response) => {
+      if (response.ok) {
+        adForm.reset();
+        // addressForm.value = `${address.lat} ${address.lng}`
+        getSuccessEventListener();
+        addressForm.value = `${address.lat} ${address.lng}`;
+      }
+      else {
+        getErrorEventListener();
+      }
+    })
+      .catch(() => {
+        getErrorEventListener();
+      });
+  });
+};
+setFormSubmit();

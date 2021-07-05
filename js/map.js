@@ -1,7 +1,7 @@
 import {offers} from './generate.js';
 import renderCard from './offer.js';
 
-const addressForm = document.querySelector('#address');
+export const addressForm = document.querySelector('#address');
 
 const mapContainer = L.map('map-canvas');
 L.tileLayer(
@@ -20,10 +20,10 @@ function setActive (isActive) {
   mapFilters.classList.add('map__filters--disabled');
 
   for (let i = 0; i < activeFormFieldset.length; i++) {
-    activeFormFieldset[i].disabled = !isActive;;
+    activeFormFieldset[i].disabled = !isActive;
   }
   for (let i = 0; i < mapFiltersOption.length; i++) {
-    mapFiltersOption[i].disabled = !isActive;;
+    mapFiltersOption[i].disabled = !isActive;
   }
 
   if (isActive) {
@@ -33,12 +33,12 @@ function setActive (isActive) {
     activeForm.classList.add('ad-form--disabled');
     mapFilters.classList.add('map__filters--disabled');
   }
-    // L.tileLayer(
-    //   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    //   {
-    //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    //   },
-    // ).addTo(mapContainer);
+  // L.tileLayer(
+  //   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  //   {
+  //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  //   },
+  // ).addTo(mapContainer);
 }
 setActive(false);
 const map = mapContainer.on('load', () => {
@@ -49,7 +49,7 @@ map.setView({
   lng: 139.78199,
 }, 10);
 
-const address = {
+export const address = {
   lat: 35.68334,
   lng: 139.78199,
 };
