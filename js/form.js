@@ -1,5 +1,5 @@
-import {getSuccessEventListener, getErrorEventListener} from './form-message.js';
-import {address, addressForm} from './map.js';
+import {showSuccessMessage, showErrorMessage} from './form-message.js';
+import {address, addressForm, marker} from './map.js';
 const inputTitle = document.querySelector('#title');
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -57,9 +57,7 @@ inputPrice.addEventListener('input', () => {
 
 
 const timeIn = document.querySelector('#timein');
-// const timeInChildren = timeIn.children;
 const timeOut = document.querySelector('#timeout');
-// const timeOutChildren = timeOut.children;
 
 timeIn.addEventListener('change', () => {
   if (timeIn.value === '12:00') {
@@ -81,11 +79,10 @@ timeOut.addEventListener('change', () => {
 });
 
 const roomNumber = document.querySelector('#room_number');
-// const roomNumberChildren = roomNumber.children;
 const capacityNumber = document.querySelector('#capacity');
 const capacityNumberChildren = capacityNumber.children;
 
-const syncCapacity = () => {
+function syncCapacity () {
   if (roomNumber.value === '1') {
     capacityNumber.value = '1';
     capacityNumberChildren[0].disabled = true;
@@ -114,16 +111,16 @@ const syncCapacity = () => {
     capacityNumberChildren[2].disabled = true;
     capacityNumberChildren[3].disabled = true;
   }
-};
+}
 syncCapacity();
 
 roomNumber.addEventListener('change', () => {
   syncCapacity();
 });
 
-
 const adForm = document.querySelector('.ad-form');
-const setFormSubmit = () => {
+
+function setFormSubmit () {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -138,17 +135,17 @@ const setFormSubmit = () => {
     ).then((response) => {
       if (response.ok) {
         adForm.reset();
-        // addressForm.value = `${address.lat} ${address.lng}`
-        getSuccessEventListener();
+        marker.setLatLng({ lat: 35.68334, lng: 139.78199 });
+        showSuccessMessage();
         addressForm.value = `${address.lat} ${address.lng}`;
       }
       else {
-        getErrorEventListener();
+        showErrorMessage();
       }
     })
       .catch(() => {
-        getErrorEventListener();
+        showErrorMessage();
       });
   });
-};
+}
 setFormSubmit();

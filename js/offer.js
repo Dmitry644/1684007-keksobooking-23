@@ -22,30 +22,34 @@ const renderCard = (ad) => {
 
 
   const cardElementAvatar = cardElement.querySelector('.popup__avatar');
-  cardElementAvatar.src = ad.author.author;
+  cardElementAvatar.src = ad.author.avatar;
 
   const cardElementTitle = cardElement.querySelector('.popup__title');
   cardElementTitle.textContent = ad.offer.title;
   if (!ad.offer.title) {
-    cardElementTitle.textContent = 'Описание отсутствует';
+    // cardElementTitle.textContent = 'Описание отсутствует';
+    cardElementTitle.remove();
   }
 
   const cardElementAddress = cardElement.querySelector('.popup__text--address');
   cardElementAddress.textContent = ad.offer.address;
   if (!ad.offer.address) {
-    cardElementAddress.textContent = 'Адрес отсутствует';
+    // cardElementAddress.textContent = 'Адрес отсутствует';
+    cardElementAddress.remove();
   }
 
   const cardElementType = cardElement.querySelector('.popup__type');
   cardElementType.textContent = getType(ad.offer.type);
   if (!ad.offer.type) {
-    cardElementType.textContent = 'Описание отсутствует';
+    // cardElementType.textContent = 'Описание отсутствует';
+    cardElementType.remove();
   }
 
   const cardElementPrice = cardElement.querySelector('.popup__text--price');
   cardElementPrice.textContent = `${ad.offer.price} ₽/ночь`;
   if (!ad.offer.price) {
-    cardElementPrice.textContent = 'Описание отсутствует';
+    // cardElementPrice.textContent = 'Описание отсутствует';
+    cardElementPrice.remove();
   }
 
   const cardElementCapacity = cardElement.querySelector('.popup__text--capacity');
@@ -70,35 +74,41 @@ const renderCard = (ad) => {
     cardElementTime.textContent = (`Время заезда ${ad.offer.checkin} а время выезда отсутствует`);
   }
   if (!ad.offer.checkin && !ad.offer.checkout) {
-    cardElementTime.textContent = ('Описание отсутствует');
+    // cardElementTime.textContent = ('Описание отсутствует');
+    cardElementTime.remove();
   }
 
-  const features = ad.offer.features;
-  const cardElementFeaturesList = cardElement.querySelector('.popup__features');
+  // const features = ad.offer.features;
+  // const cardElementFeaturesList = cardElement.querySelector('.popup__features');
 
-  // собираем html-строку, состоящую из нужных тегов
+
+  const features = ad.offer.features || [];
+  const cardElementFeaturesList = cardElement.querySelector('.popup__features');
   const featuresHtml = features.map(
     (feature) => `<li class="popup__feature popup__feature--${feature}"></li>`,  // тут с помощью .map собираем массив из строк
   ).join(''); // методом .join склеиваем его в одну строку
 
   // заменяем полностью html
   cardElementFeaturesList.innerHTML = featuresHtml;
+
   if (!ad.offer.features) {
     cardElementFeaturesList.textContent = 'Описание отсутствует';
+    cardElementFeaturesList.remove();
   }
 
   const cardElementDescription = cardElement.querySelector('.popup__description');
   cardElementDescription.textContent = ad.offer.description;
   if (!ad.offer.description) {
-    cardElementDescription.textContent = 'Описание отсутствует';
+    // cardElementDescription.textContent = 'Описание отсутствует';
+    cardElementDescription.remove();
   }
 
-  const cardElementPhotos = cardElement.querySelector('.popup__photo');
-  cardElementPhotos.src = ad.offer.photo;
-  if (!ad.offer.photo) {
-    cardElementPhotos.textContent = 'Описание отсутствует';
-  }
-
+  // const cardElementPhotos = cardElement.querySelector('.popup__photo');
+  const photo = ad.offer.photos || [];
+  photo.forEach((value) => {
+    const popupPhotos = cardElement.querySelector('.popup__photos');
+    popupPhotos.insertAdjacentHTML('afterbegin', `<img class="popup__photo" src="${value}" width="45" height="40" alt="Фотография жилья">`);
+  });
   return cardElement;
 
 };

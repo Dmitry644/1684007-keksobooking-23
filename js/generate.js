@@ -106,6 +106,3 @@ export function createOffers () {
   }
   return offers;
 }
-
-createOffers();
-//   console.log(offers);
