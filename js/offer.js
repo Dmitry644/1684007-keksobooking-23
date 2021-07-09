@@ -1,5 +1,3 @@
-// import {offers} from './generate.js';
-
 function getType (type) {
   switch (type) {
     case 'flat':
@@ -15,7 +13,7 @@ function getType (type) {
   }
 }
 
-const renderCard = (ad) => {
+function renderCard (ad) {
 
   const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
   const cardElement = cardTemplate.cloneNode(true);
@@ -27,28 +25,24 @@ const renderCard = (ad) => {
   const cardElementTitle = cardElement.querySelector('.popup__title');
   cardElementTitle.textContent = ad.offer.title;
   if (!ad.offer.title) {
-    // cardElementTitle.textContent = 'Описание отсутствует';
     cardElementTitle.remove();
   }
 
   const cardElementAddress = cardElement.querySelector('.popup__text--address');
   cardElementAddress.textContent = ad.offer.address;
   if (!ad.offer.address) {
-    // cardElementAddress.textContent = 'Адрес отсутствует';
     cardElementAddress.remove();
   }
 
   const cardElementType = cardElement.querySelector('.popup__type');
   cardElementType.textContent = getType(ad.offer.type);
   if (!ad.offer.type) {
-    // cardElementType.textContent = 'Описание отсутствует';
     cardElementType.remove();
   }
 
   const cardElementPrice = cardElement.querySelector('.popup__text--price');
   cardElementPrice.textContent = `${ad.offer.price} ₽/ночь`;
   if (!ad.offer.price) {
-    // cardElementPrice.textContent = 'Описание отсутствует';
     cardElementPrice.remove();
   }
 
@@ -74,21 +68,14 @@ const renderCard = (ad) => {
     cardElementTime.textContent = (`Время заезда ${ad.offer.checkin} а время выезда отсутствует`);
   }
   if (!ad.offer.checkin && !ad.offer.checkout) {
-    // cardElementTime.textContent = ('Описание отсутствует');
     cardElementTime.remove();
   }
-
-  // const features = ad.offer.features;
-  // const cardElementFeaturesList = cardElement.querySelector('.popup__features');
-
 
   const features = ad.offer.features || [];
   const cardElementFeaturesList = cardElement.querySelector('.popup__features');
   const featuresHtml = features.map(
-    (feature) => `<li class="popup__feature popup__feature--${feature}"></li>`,  // тут с помощью .map собираем массив из строк
-  ).join(''); // методом .join склеиваем его в одну строку
+    (feature) => `<li class="popup__feature popup__feature--${feature}"></li>`).join('');
 
-  // заменяем полностью html
   cardElementFeaturesList.innerHTML = featuresHtml;
 
   if (!ad.offer.features) {
@@ -99,11 +86,9 @@ const renderCard = (ad) => {
   const cardElementDescription = cardElement.querySelector('.popup__description');
   cardElementDescription.textContent = ad.offer.description;
   if (!ad.offer.description) {
-    // cardElementDescription.textContent = 'Описание отсутствует';
     cardElementDescription.remove();
   }
 
-  // const cardElementPhotos = cardElement.querySelector('.popup__photo');
   const photo = ad.offer.photos || [];
   photo.forEach((value) => {
     const popupPhotos = cardElement.querySelector('.popup__photos');
@@ -111,6 +96,6 @@ const renderCard = (ad) => {
   });
   return cardElement;
 
-};
+}
 
 export default renderCard;
