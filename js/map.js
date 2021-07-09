@@ -1,6 +1,7 @@
 import {filterAds} from './filter.js';
 import renderCard from './offer.js';
 import {showAlert} from './form-message.js';
+import {debounce} from './debounce.js';
 
 export const addressForm = document.querySelector('#address');
 
@@ -15,9 +16,7 @@ function setFilterBlocked () {
 
 function setActive (isActive) {
   const activeForm = document.querySelector('.ad-form');
-  // const mapFilters = document.querySelector('.map__filters');
   const activeFormFieldset = activeForm.children;
-  // const mapFiltersOption = mapFilters.children;
   activeForm.classList.add('ad-form--disabled');
   mapFilters.classList.add('map__filters--disabled');
 
@@ -54,11 +53,11 @@ map.setView({
   lng: 139.78199,
 }, 10);
 
-export const address = {
+export const ADDRESS = {
   lat: 35.68334,
   lng: 139.78199,
 };
-addressForm.value = `${address.lat} ${address.lng}`;
+addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
 
 
 const mainMarkerIcon = L.icon({
@@ -113,7 +112,6 @@ export function getMarkerOnMap (offer) {
 }
 
 function makeReset (offers) {
-  // const mapFilters = document.querySelector('.map__filters');
   const adForm = document.querySelector('.ad-form');
   const buttonReset = document.querySelector('.ad-form__reset');
 
@@ -122,7 +120,7 @@ function makeReset (offers) {
     adForm.reset();
     mapFilters.reset();
     marker.setLatLng({ lat: 35.68334, lng: 139.78199 });
-    addressForm.value = `${address.lat} ${address.lng}`;
+    addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
 
     offersGroup.clearLayers();
     filterAds(offers).slice(0, 10)
@@ -141,13 +139,15 @@ fetch('https://23.javascript.pages.academy/keksobooking/data')
         getMarkerOnMap (offer);
       });
     makeReset (offers);
-    form.addEventListener('change', () => {
+
+    const debounceFunction = debounce(() => {
       offersGroup.clearLayers();
       filterAds(offers).slice(0, 10)
         .forEach((offer) => {
           getMarkerOnMap(offer);
         });
-    });
+    }, 500);
+    form.addEventListener('change', debounceFunction);
   }).catch(() => {
     showAlert();
     setFilterBlocked();
