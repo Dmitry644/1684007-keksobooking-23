@@ -1,5 +1,5 @@
 import {showSuccessMessage, showErrorMessage} from './form-message.js';
-import {address, addressForm, marker} from './map.js';
+import {ADDRESS, addressForm, marker} from './map.js';
 const inputTitle = document.querySelector('#title');
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -137,7 +137,7 @@ function setFormSubmit () {
         adForm.reset();
         marker.setLatLng({ lat: 35.68334, lng: 139.78199 });
         showSuccessMessage();
-        addressForm.value = `${address.lat} ${address.lng}`;
+        addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
       }
       else {
         showErrorMessage();
