@@ -1,8 +1,8 @@
 import {showSuccessMessage, showErrorMessage} from './form-message.js';
 import {ADDRESS, addressForm, marker} from './map.js';
-const inputTitle = document.querySelector('#title');
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
+const inputTitle = document.querySelector('#title');
 
 inputTitle.addEventListener('input', () => {
   const valueLength = inputTitle.value.length;
