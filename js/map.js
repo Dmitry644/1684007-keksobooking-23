@@ -136,6 +136,7 @@ fetch('https://23.javascript.pages.academy/keksobooking/data')
       .forEach((offer) => {
         getMarkerOnMap (offer);
       });
+
     makeReset(offers);
 
     const debounceFunction = debounce(() => {
