@@ -3,6 +3,11 @@ import renderCard from './offer.js';
 import {showAlert} from './form-message.js';
 import {debounce} from './debounce.js';
 
+export const ADDRESS = {
+  lat: 35.68334,
+  lng: 139.78199,
+};
+
 export const addressForm = document.querySelector('#address');
 
 const mapFilters = document.querySelector('.map__filters');
@@ -53,10 +58,6 @@ map.setView({
   lng: 139.78199,
 }, 10);
 
-export const ADDRESS = {
-  lat: 35.68334,
-  lng: 139.78199,
-};
 addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
 
 
