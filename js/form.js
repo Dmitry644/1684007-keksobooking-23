@@ -1,7 +1,9 @@
 import {showSuccessMessage, showErrorMessage} from './form-message.js';
-import {ADDRESS, addressForm, marker} from './map.js';
+import {ADDRESS, addressForm, marker, form} from './map.js';
+
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
+
 const inputTitle = document.querySelector('#title');
 
 inputTitle.addEventListener('input', () => {
@@ -135,16 +137,19 @@ function setFormSubmit () {
     ).then((response) => {
       if (response.ok) {
         adForm.reset();
+        form.reset();
         marker.setLatLng({ lat: 35.68334, lng: 139.78199 });
         showSuccessMessage();
         addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
       }
       else {
         showErrorMessage();
+        addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
       }
     })
       .catch(() => {
         showErrorMessage();
+        addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
       });
   });
 }

@@ -52,7 +52,6 @@ export const map = mapContainer.on('load', () => {
   setActive(true);
 });
 
-
 map.setView({
   lat: 35.68334,
   lng: 139.78199,
@@ -83,8 +82,7 @@ marker.on('moveend', (evt) => {
   addressForm.value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`;
 });
 
-
-const form = document.querySelector('.map__filters');
+export const form = document.querySelector('.map__filters');
 export const offersGroup = L.layerGroup().addTo(map);
 
 export function getMarkerOnMap (offer) {
@@ -112,7 +110,7 @@ export function getMarkerOnMap (offer) {
     );
 }
 
-function makeReset (offers) {
+export function makeReset (offers) {
   const adForm = document.querySelector('.ad-form');
   const buttonReset = document.querySelector('.ad-form__reset');
 
@@ -131,7 +129,6 @@ function makeReset (offers) {
   });
 }
 
-
 fetch('https://23.javascript.pages.academy/keksobooking/data')
   .then((response) => response.json())
   .then((offers) => {
@@ -139,7 +136,7 @@ fetch('https://23.javascript.pages.academy/keksobooking/data')
       .forEach((offer) => {
         getMarkerOnMap (offer);
       });
-    makeReset (offers);
+    makeReset(offers);
 
     const debounceFunction = debounce(() => {
       offersGroup.clearLayers();
