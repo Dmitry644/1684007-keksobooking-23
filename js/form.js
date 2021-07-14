@@ -1,6 +1,7 @@
 import {showSuccessMessage, showErrorMessage} from './form-message.js';
-
-import {ADDRESS, addressForm, marker, form} from './map.js';
+import {ADDRESS, addressForm, marker, form, getMarkerOnMap, offersGroup, MAX_MARKER_COUNT} from './map.js';
+import {getData} from './data.js';
+import {filterAds} from './filter.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -141,7 +142,16 @@ function setFormSubmit () {
         form.reset();
         marker.setLatLng({ lat: 35.68334, lng: 139.78199 });
         showSuccessMessage();
+        offersGroup.clearLayers();
         addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
+
+        getData()
+          .then((offers) => {
+            filterAds(offers).slice(0, MAX_MARKER_COUNT)
+              .forEach((offer) => {
+                getMarkerOnMap (offer);
+              });
+          });
       }
       else {
         showErrorMessage();

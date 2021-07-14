@@ -2,11 +2,16 @@ import {filterAds} from './filter.js';
 import renderCard from './offer.js';
 import {showAlert} from './form-message.js';
 import {debounce} from './debounce.js';
+import {getData} from './data.js';
 
 export const ADDRESS = {
   lat: 35.68334,
   lng: 139.78199,
 };
+
+export const MAX_MARKER_COUNT = 10;
+
+const DEBOUNCE_COUNT = 500;
 
 export const addressForm = document.querySelector('#address');
 
@@ -48,16 +53,8 @@ L.tileLayer(
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 ).addTo(mapContainer);
-export const map = mapContainer.on('load', () => {
-  setActive(true);
-});
 
-map.setView({
-  lat: 35.68334,
-  lng: 139.78199,
-}, 10);
-
-addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
+export const form = document.querySelector('.map__filters');
 
 
 const mainMarkerIcon = L.icon({
@@ -76,14 +73,8 @@ export const marker = L.marker(
     icon: mainMarkerIcon,
   },
 );
-marker.addTo(map);
 
-marker.on('moveend', (evt) => {
-  addressForm.value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`;
-});
-
-export const form = document.querySelector('.map__filters');
-export const offersGroup = L.layerGroup().addTo(map);
+export const offersGroup = L.layerGroup();
 
 export function getMarkerOnMap (offer) {
   const iconOffer = L.icon({
@@ -122,32 +113,50 @@ export function makeReset (offers) {
     addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
 
     offersGroup.clearLayers();
-    filterAds(offers).slice(0, 10)
+    filterAds(offers).slice(0, MAX_MARKER_COUNT)
       .forEach((offer) => {
         getMarkerOnMap(offer);
       });
   });
 }
 
-fetch('https://23.javascript.pages.academy/keksobooking/data')
-  .then((response) => response.json())
-  .then((offers) => {
-    filterAds(offers).slice(0, 10)
-      .forEach((offer) => {
-        getMarkerOnMap (offer);
-      });
+export const map = mapContainer.on('load', () => {
+  setActive(true);
 
-    makeReset(offers);
-
-    const debounceFunction = debounce(() => {
-      offersGroup.clearLayers();
-      filterAds(offers).slice(0, 10)
+  getData()
+    .then((offers) => {
+      filterAds(offers).slice(0, MAX_MARKER_COUNT)
         .forEach((offer) => {
-          getMarkerOnMap(offer);
+          getMarkerOnMap (offer);
         });
-    }, 500);
-    form.addEventListener('change', debounceFunction);
-  }).catch(() => {
-    showAlert();
-    setFilterBlocked();
-  });
+
+      makeReset(offers);
+
+      const debounceFunction = debounce(() => {
+        offersGroup.clearLayers();
+        filterAds(offers).slice(0, MAX_MARKER_COUNT)
+          .forEach((offer) => {
+            getMarkerOnMap(offer);
+          });
+      }, DEBOUNCE_COUNT);
+      form.addEventListener('change', debounceFunction);
+    }).catch(() => {
+      showAlert();
+      setFilterBlocked();
+    });
+});
+
+offersGroup.addTo(map);
+
+marker.addTo(map);
+
+map.setView({
+  lat: 35.68334,
+  lng: 139.78199,
+}, 10);
+
+addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
+
+marker.on('moveend', (evt) => {
+  addressForm.value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`;
+});

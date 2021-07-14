@@ -55,7 +55,7 @@ function renderCard (ad) {
     cardElementCapacity.textContent = (`Количество комнат ${ad.offer.rooms} а данные о количестве гостей отсутсвуют`);
   }
   if (!ad.offer.rooms && !ad.offer.guests) {
-    cardElementCapacity.textContent = ('Описание отсутствует');
+    cardElementCapacity.remove();
   }
 
 
@@ -73,13 +73,16 @@ function renderCard (ad) {
 
   const features = ad.offer.features || [];
   const cardElementFeaturesList = cardElement.querySelector('.popup__features');
-  const featuresHtml = features.map(
-    (feature) => `<li class="popup__feature popup__feature--${feature}"></li>`).join('');
+  const featuresFragment = document.createDocumentFragment();
+  features.forEach((feature) => {
+    const featureElement = document.createElement('li');
+    featureElement.classList.add('popup__feature', `popup__feature--${feature}`);
 
-  cardElementFeaturesList.innerHTML = featuresHtml;
+    featuresFragment.appendChild(featureElement);
+  });
+  cardElementFeaturesList.appendChild(featuresFragment);
 
   if (!ad.offer.features) {
-    cardElementFeaturesList.textContent = 'Описание отсутствует';
     cardElementFeaturesList.remove();
   }
 
@@ -90,9 +93,17 @@ function renderCard (ad) {
   }
 
   const photo = ad.offer.photos || [];
+
   photo.forEach((value) => {
     const popupPhotos = cardElement.querySelector('.popup__photos');
-    popupPhotos.insertAdjacentHTML('afterbegin', `<img class="popup__photo" src="${value}" width="45" height="40" alt="Фотография жилья">`);
+    const photoElement = document.createElement('img');
+    photoElement.classList.add('popup__photo');
+    photoElement.width = 45;
+    photoElement.height = 45;
+    photoElement.alt = 'Фотография жилья';
+    photoElement.src = value;
+
+    popupPhotos.appendChild(photoElement);
   });
   return cardElement;
 

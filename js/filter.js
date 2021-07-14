@@ -1,11 +1,14 @@
+const MIN_PRICE = 10000;
+const MAX_PRICE = 50000;
+
 function isPriceInFilterRange (price, range) {
   switch (range) {
     case 'middle':
-      return price >= 10000 && price <= 50000;
+      return price >= MIN_PRICE && price <= MAX_PRICE;
     case 'low':
-      return price < 10000;
+      return price < MIN_PRICE;
     case 'high':
-      return price > 50000;
+      return price > MAX_PRICE;
   }
 }
 

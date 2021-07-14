@@ -1,3 +1,5 @@
+const TIMER_COUNT = 10000;
+
 export function showSuccessMessage () {
   function getSuccessMessage() {
     const successTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -10,13 +12,13 @@ export function showSuccessMessage () {
 
   document.body.append(getSuccessMessage());
   const success = document.querySelector('.success');
-  const escHandler = (evt) => {
+  const getEscHandler = function (evt) {
     if (evt.keyCode === 27) {
       success.parentNode.removeChild(success);
-      document.removeEventListener('keydown', escHandler);
+      document.removeEventListener('keydown', getEscHandler);
     }
   };
-  document.addEventListener('keydown', escHandler);
+  document.addEventListener('keydown', getEscHandler);
 
 
   success.addEventListener('click', () => {
@@ -38,13 +40,13 @@ export function showErrorMessage () {
   document.body.append(getErrorMessage());
   const error = document.querySelector('.error');
 
-  const escHandlerError = (evt) => {
+  const getEscHandlerError = function (evt) {
     if (evt.keyCode === 27) {
       error.parentNode.removeChild(error);
-      document.removeEventListener('keydown', escHandlerError);
+      document.removeEventListener('keydown', getEscHandlerError);
     }
   };
-  document.addEventListener('keydown', escHandlerError);
+  document.addEventListener('keydown', getEscHandlerError);
 
   error.addEventListener('click', () => {
     error.parentNode.removeChild(error);
@@ -70,5 +72,5 @@ export function showAlert () {
 
   setTimeout(() => {
     alertContainer.remove();
-  }, 10000);
+  }, TIMER_COUNT);
 }
