@@ -3,6 +3,7 @@ import renderCard from './offer.js';
 import {showAlert} from './form-message.js';
 import {debounce} from './debounce.js';
 import {getData} from './data.js';
+import {inputPrice} from './form.js';
 
 export const ADDRESS = {
   lat: 35.68334,
@@ -111,6 +112,7 @@ export function makeReset (offers) {
     mapFilters.reset();
     marker.setLatLng({ lat: 35.68334, lng: 139.78199 });
     addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
+    inputPrice.placeholder = '5000';
 
     offersGroup.clearLayers();
     filterAds(offers).slice(0, MAX_MARKER_COUNT)

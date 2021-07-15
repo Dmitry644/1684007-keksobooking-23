@@ -23,7 +23,7 @@ inputTitle.addEventListener('input', () => {
 });
 
 const inputSelect = document.querySelector('#type');
-const inputPrice = document.querySelector('#price');
+export const inputPrice = document.querySelector('#price');
 
 inputSelect.addEventListener('input', () => {
 
@@ -149,6 +149,7 @@ function setFormSubmit () {
         showSuccessMessage();
         offersGroup.clearLayers();
         addressForm.value = `${ADDRESS.lat} ${ADDRESS.lng}`;
+        inputPrice.placeholder = '5000';
 
         getData()
           .then((offers) => {
