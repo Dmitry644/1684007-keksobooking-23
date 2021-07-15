@@ -80,6 +80,7 @@ function renderCard (ad) {
 
     featuresFragment.appendChild(featureElement);
   });
+  cardElementFeaturesList.textContent = '';
   cardElementFeaturesList.appendChild(featuresFragment);
 
   if (!ad.offer.features) {

@@ -29,14 +29,19 @@ inputSelect.addEventListener('input', () => {
 
   if (inputSelect.value === 'bungalow') {
     inputPrice.placeholder = '0';
+    inputPrice.setAttribute('min', '0');
   } else if (inputSelect.value === 'flat') {
     inputPrice.placeholder = '1000';
+    inputPrice.setAttribute('min', '1000');
   } else if (inputSelect.value === 'hotel') {
     inputPrice.placeholder = '3000';
+    inputPrice.setAttribute('min', '3000');
   } else if (inputSelect.value === 'house') {
     inputPrice.placeholder = '5000';
+    inputPrice.setAttribute('min', '5000');
   } else if (inputSelect.value === 'palace') {
     inputPrice.placeholder = '10000';
+    inputPrice.setAttribute('min', '10000');
   }
 });
 
